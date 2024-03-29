@@ -14,7 +14,6 @@ struct Zodiac
     string zodiac_sign;
 };
 
-#pragma pack(pop)
 
 void Create(Zodiac* S, int B[][3], const int N);
 void Print(Zodiac* S, int B[][3], const int N);
