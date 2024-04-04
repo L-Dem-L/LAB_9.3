@@ -65,8 +65,7 @@ int main()
             Print(S, B, N);
             break;
         case 4:
-            cout << "Enter search criteria: ";
-            cout << "Surname";
+            cout << "Enter Surname to search: ";
             cin.get();
             cin.sync();
             getline(cin, f_surname);
