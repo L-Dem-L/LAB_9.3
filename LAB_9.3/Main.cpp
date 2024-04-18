@@ -197,20 +197,30 @@ void search(Zodiac* S, int B[][3], const int N, const string f_surname)
 
 void SaveToFile(Zodiac* S, int B[][3], const int N, const char* filename)
 {
-    ofstream fout(filename, ios::binary);
-    fout.write((char*)&N, sizeof(N));
-    fout.write((char*)S, sizeof(Zodiac) * N);
-    fout.write((char*)B, sizeof(int) * 3 * N);
+    ofstream fout(filename);
+    fout << N << endl; // Writing the number of users to the file
+    for (int i = 0; i < N; ++i) {
+        fout << S[i].surname << " " << S[i].name << " " << S[i].zodiac_sign << " ";
+        for (int j = 0; j < 3; ++j) {
+            fout << B[i][j] << " ";
+        }
+        fout << endl;
+    }
     fout.close();
 }
 
 void LoadFromFile(Zodiac*& S, int B[][3], int& N, const char* filename)
 {
     delete[] S;
-    ifstream fin(filename, ios::binary);
-    fin.read((char*)&N, sizeof(N));
+    ifstream fin(filename);
+    fin >> N; // Reading the number of users from the file
+    fin.ignore(); // Ignore the newline character
     S = new Zodiac[N];
-    fin.read((char*)S, sizeof(Zodiac) * N);
-    fin.read((char*)B, sizeof(int) * 3 * N);
+    for (int i = 0; i < N; ++i) {
+        fin >> S[i].surname >> S[i].name >> S[i].zodiac_sign;
+        for (int j = 0; j < 3; ++j) {
+            fin >> B[i][j];
+        }
+    }
     fin.close();
 }
